@@ -48,7 +48,7 @@ export default function Waitlist() {
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease:  }}
         style={{
           position: 'relative',
           maxWidth: '36rem',
@@ -92,7 +92,7 @@ export default function Waitlist() {
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, ease:  }}
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem 0' }}
             >
               <div style={{
