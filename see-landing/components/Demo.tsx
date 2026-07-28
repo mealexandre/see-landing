@@ -185,7 +185,7 @@ export default function Demo({ videoSrc }: DemoProps) {
                 gap: '0.25rem'
               }}
             >
-              Join the waitlist →
+              Get early access → {/* <--- აქ შეიცვალა ტექსტი */}
             </button>
           </p>
         </div>
