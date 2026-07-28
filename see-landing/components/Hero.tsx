@@ -186,23 +186,6 @@ export default function Hero() {
           marginTop: '-8vh'
         }}
       >
-        <motion.div variants={item} style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          padding: '0.375rem 1rem',
-          borderRadius: '9999px',
-          marginBottom: '1.5rem',
-          background: 'rgba(255, 255, 255, 0.03)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)'
-        }}>
-          <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#47bdb2' }} />
-          <span style={{ fontSize: '11px', fontFamily: 'monospace', letterSpacing: '0.15em', color: '#cbd5e1', textTransform: 'uppercase' }}>
-            Introduction
-          </span>
-        </motion.div>
-
         <motion.h1 variants={item} style={{ fontSize: '3.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
           Find your space. <br /> Find your people.
         </motion.h1>
@@ -258,7 +241,7 @@ export default function Hero() {
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
             width: '320px',
-            minHeight: '112px', // <--- მკაცრად განსაზღვრული მინიმალური სიმაღლე
+            minHeight: '112px',
             maxWidth: '100%',
             boxSizing: 'border-box'
           }}>
@@ -292,7 +275,7 @@ export default function Hero() {
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
             width: '320px',
-            minHeight: '112px', // <--- მკაცრად განსაზღვრული მინიმალური სიმაღლე
+            minHeight: '112px',
             maxWidth: '100%',
             boxSizing: 'border-box'
           }}>
