@@ -23,7 +23,7 @@ export default function Demo({ videoSrc }: DemoProps) {
   const showVideo = Boolean(videoSrc) && isPlaying;
 
   return (
-    <section id="demo" style={{ backgroundColor: '#0f172a', padding: '6rem 1.5rem', position: 'relative' }}>
+    <section id="demo" style={{ backgroundColor: '#0f172a', padding: '6rem 1.5rem', position: 'relative', userSelect: 'none' }}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         {/* Header */}
         <motion.div
@@ -53,8 +53,8 @@ export default function Demo({ videoSrc }: DemoProps) {
           <motion.h2 variants={item} style={{ fontSize: '2.5rem', fontWeight: 600, color: '#ffffff', marginBottom: '1rem', letterSpacing: '-0.025em' }}>
             See it in action.
           </motion.h2>
-          <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '32rem', margin: '0 auto' }}>
-            A quick walkthrough of how curated micro-groups come together — from match to meetup.
+          <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '36rem', margin: '0 auto' }}>
+            See how an online introduction becomes a real-world connection.
           </motion.p>
         </motion.div>
 
@@ -167,17 +167,28 @@ export default function Demo({ videoSrc }: DemoProps) {
           )}
         </motion.div>
 
-        {/* Caption */}
-        <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#64748b', marginTop: '1.5rem' }}>
-          Full walkthrough coming soon —{' '}
-          <button
-            onClick={() => document.querySelector('#waitlist')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{ color: '#47bdb2', background: 'none', border: 'none', cursor: 'pointer', font: 'inherit' }}
-          >
-            join the waitlist
-          </button>{' '}
-          to get notified.
-        </p>
+        {/* Call to Action / Caption */}
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <p style={{ fontSize: '1.0625rem', color: '#ffffff', fontWeight: 500, margin: 0 }}>
+            Ready to find your space?{' '}
+            <button
+              onClick={() => document.querySelector('#waitlist')?.scrollIntoView({ behavior: 'smooth' })}
+              style={{
+                color: '#47bdb2',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                font: 'inherit',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.25rem'
+              }}
+            >
+              Join the waitlist →
+            </button>
+          </p>
+        </div>
       </div>
     </section>
   );
