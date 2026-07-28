@@ -33,7 +33,7 @@ export default function Hero() {
           maxWidth: '850px', 
           margin: '0 auto', 
           zIndex: 1,
-          marginTop: '-8vh' // <--- ეს აწევს მთლიან ბლოკს ოდნავ ზემოთ, რომ შუაში აღარ "ჩაიძიროს"
+          marginTop: '-8vh'
         }}
       >
         <motion.div variants={item} style={{
@@ -68,7 +68,7 @@ export default function Hero() {
           flexWrap: 'wrap',
           gap: '1rem',
           justifyContent: 'center',
-          alignItems: 'stretch' // <--- ეს უზრუნველყოფს, რომ ორივე ბარათი ერთ სიმაღლეზე გაიწელოს
+          alignItems: 'center'
         }}>
           <style>{`
             .intention-card {
@@ -107,9 +107,10 @@ export default function Hero() {
             border: '1px solid rgba(255, 255, 255, 0.08)',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
-            width: '320px', // <--- ფიქსირებული სიგანე
-            height: '100%', // <--- უზრუნველყოფს ტოლ სიმაღლეს
-            maxWidth: '100%'
+            width: '320px',
+            minHeight: '112px', // <--- მკაცრად განსაზღვრული მინიმალური სიმაღლე
+            maxWidth: '100%',
+            boxSizing: 'border-box'
           }}>
             <span className="intention-card-icon" style={{
               display: 'flex',
@@ -140,9 +141,10 @@ export default function Hero() {
             border: '1px solid rgba(255, 255, 255, 0.08)',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
-            width: '320px', // <--- ფიქსირებული სიგანე
-            height: '100%', // <--- უზრუნველყოფს ტოლ სიმაღლეს
-            maxWidth: '100%'
+            width: '320px',
+            minHeight: '112px', // <--- მკაცრად განსაზღვრული მინიმალური სიმაღლე
+            maxWidth: '100%',
+            boxSizing: 'border-box'
           }}>
             <span className="intention-card-icon" style={{
               display: 'flex',
