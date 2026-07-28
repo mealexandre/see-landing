@@ -155,6 +155,9 @@ function ParticleNetwork() {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
+        // ეს ნიღაბი ცენტრს (ტექსტის უკან) ასუფთავებს და წერტილებს მხოლოდ გვერდებზე ტოვებს
+        WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 15%, black 65%)',
+        maskImage: 'radial-gradient(ellipse at center, transparent 15%, black 65%)',
       }}
     />
   );
