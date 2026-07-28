@@ -30,7 +30,7 @@ const item = {
 };
 
 /* ---------------------------------------------------------------- */
-/*  Content                                                          */
+/*  Content                                                         */
 /* ---------------------------------------------------------------- */
 
 const timeline = [
@@ -109,7 +109,7 @@ const features = [
 ];
 
 /* ---------------------------------------------------------------- */
-/*  Small shared pieces                                              */
+/*  Small shared pieces                                            */
 /* ---------------------------------------------------------------- */
 
 function Eyebrow({ label }: { label: string }) {
@@ -145,12 +145,12 @@ function Eyebrow({ label }: { label: string }) {
 }
 
 /* ---------------------------------------------------------------- */
-/*  Section 1 — Our Story / Timeline                                 */
+/*  Section 1 — Our Story / Timeline                                  */
 /* ---------------------------------------------------------------- */
 
 function StorySection() {
   return (
-    <section id="about" style={{ backgroundColor: '#0f172a', padding: '6rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+    <section id="about" style={{ backgroundColor: '#0f172a', padding: '6rem 1.5rem', position: 'relative', overflow: 'hidden', userSelect: 'none' }}>
       {/* ambient glow */}
       <div
         style={{
@@ -273,6 +273,7 @@ function IntentionSection() {
         padding: '6rem 1.5rem',
         position: 'relative',
         borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        userSelect: 'none',
       }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
@@ -379,6 +380,7 @@ function HowItWorksSection() {
         padding: '6rem 1.5rem',
         position: 'relative',
         borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        userSelect: 'none',
       }}
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -397,7 +399,7 @@ function HowItWorksSection() {
             Less searching. More belonging.
           </motion.h2>
           <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '34rem', margin: '0 auto' }}>
-            One thoughtful path from “who could I meet?” to “we should do this again.”
+            From a simple introduction to a real connection.
           </motion.p>
         </motion.div>
 
@@ -472,7 +474,7 @@ function HowItWorksSection() {
 }
 
 /* ---------------------------------------------------------------- */
-/*  Section 4 — Why Us (feature grid)                                 */
+/*  Section 4 — Why Us (feature grid)                                  */
 /* ---------------------------------------------------------------- */
 
 function WhyUsSection() {
@@ -484,6 +486,7 @@ function WhyUsSection() {
         padding: '6rem 1.5rem',
         position: 'relative',
         borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        userSelect: 'none',
       }}
     >
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
@@ -561,7 +564,7 @@ function WhyUsSection() {
 }
 
 /* ---------------------------------------------------------------- */
-/*  Export                                                            */
+/*  Export                                                          */
 /* ---------------------------------------------------------------- */
 
 export default function About() {
