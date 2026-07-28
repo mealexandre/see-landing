@@ -20,9 +20,22 @@ export default function Waitlist() {
       return;
     }
     setStatus('loading');
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      setStatus('success');
+      const response = await fetch('https://formspree.io/f/xnjewqre', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
     } catch {
       setStatus('error');
     }
@@ -193,7 +206,7 @@ export default function Waitlist() {
             animate={{ opacity: 1, y: 0 }}
             style={{ color: '#fb7185', fontSize: '0.75rem', marginTop: '0.75rem' }}
           >
-            Please enter a valid email address.
+            Please enter a valid email address or try again.
           </motion.p>
         )}
 
