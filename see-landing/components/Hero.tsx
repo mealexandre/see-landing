@@ -28,7 +28,7 @@ export default function Hero() {
         initial="hidden"
         animate="show"
         variants={container}
-        style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', zIndex: 1 }}
+        style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto', zIndex: 1 }}
       >
         <motion.div variants={item} style={{
           display: 'inline-flex',
@@ -47,13 +47,61 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.h1 variants={item} style={{ fontSize: '3.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.025em' }}>
-          Connect in real life, <br /> not just online.
+        <motion.h1 variants={item} style={{ fontSize: '3.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
+          Find your space. <br /> Find your people.
         </motion.h1>
         
-        <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.25rem', marginBottom: '2rem', maxWidth: '36rem', margin: '0 auto 2rem auto' }}>
-          SEE brings small, curated groups together for meaningful offline interactions.
+        <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '42rem', margin: '0 auto 2.5rem auto', lineHeight: '1.6' }}>
+          SEE matches you into curated micro-groups based on shared interests, values, goals, and skills. Choose your intention—whether you're building a startup or finding new friends, real connections start here.
         </motion.p>
+
+        {/* Intention Buttons / UI Cards */}
+        <motion.div variants={item} style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          justifyContent: 'center'
+        }}>
+          {/* Friends Card */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '0.875rem 1.25rem',
+            borderRadius: '16px',
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            textAlign: 'left',
+            maxWidth: '320px'
+          }}>
+            <span style={{ fontSize: '1.75rem' }}>🤝</span>
+            <div>
+              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.125rem' }}>Friends</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.4' }}>For genuine conversation & shared experiences</div>
+            </div>
+          </div>
+          
+          {/* Professional Card */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            padding: '0.875rem 1.25rem',
+            borderRadius: '16px',
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            textAlign: 'left',
+            maxWidth: '320px'
+          }}>
+            <span style={{ fontSize: '1.75rem' }}>💼</span>
+            <div>
+              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.125rem' }}>Professional</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.4' }}>For collaborators & builders</div>
+            </div>
+          </div>
+        </motion.div>
+
       </motion.div>
     </section>
   );
