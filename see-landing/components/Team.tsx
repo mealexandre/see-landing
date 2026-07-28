@@ -60,7 +60,7 @@ const team: TeamMember[] = [
 ];
 
 /* ---------------------------------------------------------------- */
-/*  Small shared piece (matches Eyebrow in About.tsx)                */
+/*  Small shared piece (matches Eyebrow in About.tsx)                 */
 /* ---------------------------------------------------------------- */
 
 function Eyebrow({ label }: { label: string }) {
@@ -138,7 +138,7 @@ export default function Team() {
             style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '42rem', margin: '0 auto', lineHeight: 1.7 }}
           >
             SEE is brought to life by a dedicated execution team of project managers, designers, and community
-            builders from Youth Space of Georgia. We aren&apos;t just building an app; we already have the
+            builders. We aren&apos;t just building an app; we already have the
             community and the operational team to launch, test, and scale.
           </motion.p>
         </motion.div>
