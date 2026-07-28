@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const container = {
   hidden: {},
@@ -11,6 +12,153 @@ const item = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
 };
+
+// Brand teal as an RGB triplet so it can be reused inside rgba() at varying opacities
+const PARTICLE_RGB = '71, 189, 178';
+
+type Particle = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  r: number;
+};
+
+function ParticleNetwork() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Respect users who've asked for reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let frameId = 0;
+    let width = 0;
+    let height = 0;
+    let particles: Particle[] = [];
+
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const LINK_DISTANCE = 140;
+
+    const setSize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * DPR;
+      canvas.height = height * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    };
+
+    const createParticles = () => {
+      // Density scales gently with viewport size, capped so it never feels busy
+      const count = Math.min(70, Math.max(24, Math.round((width * height) / 18000)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        r: Math.random() * 1.2 + 0.6,
+      }));
+    };
+
+    setSize();
+    createParticles();
+
+    const handleResize = () => {
+      setSize();
+      particles.forEach((p) => {
+        p.x = Math.min(p.x, width);
+        p.y = Math.min(p.y, height);
+      });
+    };
+    window.addEventListener('resize', handleResize);
+
+    const drawStaticFrame = () => {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${PARTICLE_RGB}, 0.4)`;
+        ctx.fill();
+      }
+    };
+
+    if (prefersReducedMotion) {
+      // Render a single calm frame instead of animating
+      drawStaticFrame();
+      return () => window.removeEventListener('resize', handleResize);
+    }
+
+    const tick = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x <= 0 || p.x >= width) p.vx *= -1;
+        if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+        p.x = Math.max(0, Math.min(width, p.x));
+        p.y = Math.max(0, Math.min(height, p.y));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${PARTICLE_RGB}, 0.45)`;
+        ctx.fill();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < LINK_DISTANCE) {
+            const opacity = (1 - dist / LINK_DISTANCE) * 0.32;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(${PARTICLE_RGB}, ${opacity})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      frameId = requestAnimationFrame(tick);
+    };
+
+    frameId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+        pointerEvents: 'none',
+      }}
+    />
+  );
+}
 
 export default function Hero() {
   return (
@@ -24,6 +172,8 @@ export default function Hero() {
       backgroundColor: '#0f172a',
       padding: '4rem 1.5rem'
     }}>
+      <ParticleNetwork />
+
       <motion.div
         initial="hidden"
         animate="show"
