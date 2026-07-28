@@ -52,7 +52,7 @@ export default function Hero() {
         </motion.h1>
         
         <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '42rem', margin: '0 auto 2.5rem auto', lineHeight: '1.6' }}>
-          SEE matches you into curated micro-groups based on shared interests, values, goals, and skills. Choose your intention—whether you're building a startup or finding new friends, real connections start here.
+          SEE matches you into curated micro-groups based on shared interests, values, goals, and skills. Choose your intention whether you're building a startup or finding new friends, real connections start here.
         </motion.p>
 
         {/* Intention Buttons / UI Cards */}
@@ -63,41 +63,90 @@ export default function Hero() {
           gap: '1rem',
           justifyContent: 'center'
         }}>
+          <style>{`
+            .intention-card {
+              position: relative;
+              cursor: pointer;
+              transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                          border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                          box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                          background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+              will-change: transform;
+            }
+            .intention-card:hover {
+              transform: translateY(-4px) scale(1.02);
+              border-color: rgba(71, 189, 178, 0.55);
+              background: linear-gradient(135deg, rgba(71, 189, 178, 0.09), rgba(255, 255, 255, 0.035));
+              box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(71, 189, 178, 0.12), 0 0 24px rgba(71, 189, 178, 0.12);
+            }
+            .intention-card:hover .intention-card-icon {
+              background: rgba(71, 189, 178, 0.18);
+              transform: scale(1.06);
+            }
+            .intention-card-icon {
+              transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease;
+            }
+          `}</style>
+
           {/* Friends Card */}
-          <div style={{
+          <div className="intention-card" style={{
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
-            padding: '0.875rem 1.25rem',
-            borderRadius: '16px',
-            background: 'rgba(255, 255, 255, 0.04)',
+            padding: '1.125rem 1.5rem',
+            borderRadius: '20px',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
+            backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
             maxWidth: '320px'
           }}>
-            <span style={{ fontSize: '1.75rem' }}>🤝</span>
+            <span className="intention-card-icon" style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              width: '48px',
+              height: '48px',
+              borderRadius: '12px',
+              background: 'rgba(71, 189, 178, 0.08)',
+              fontSize: '1.5rem'
+            }}>🤝</span>
             <div>
-              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.125rem' }}>Friends</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.4' }}>For genuine conversation & shared experiences</div>
+              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.2rem', letterSpacing: '-0.01em' }}>Friends</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.45' }}>For genuine conversation & shared experiences</div>
             </div>
           </div>
           
           {/* Professional Card */}
-          <div style={{
+          <div className="intention-card" style={{
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
-            padding: '0.875rem 1.25rem',
-            borderRadius: '16px',
-            background: 'rgba(255, 255, 255, 0.04)',
+            padding: '1.125rem 1.5rem',
+            borderRadius: '20px',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
+            backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
             maxWidth: '320px'
           }}>
-            <span style={{ fontSize: '1.75rem' }}>💼</span>
+            <span className="intention-card-icon" style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              width: '48px',
+              height: '48px',
+              borderRadius: '12px',
+              background: 'rgba(71, 189, 178, 0.08)',
+              fontSize: '1.5rem'
+            }}>💼</span>
             <div>
-              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.125rem' }}>Professional</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.4' }}>For collaborators & builders</div>
+              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.2rem', letterSpacing: '-0.01em' }}>Professional</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.45' }}>For collaborators & builders</div>
             </div>
           </div>
         </motion.div>
