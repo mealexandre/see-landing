@@ -54,7 +54,7 @@ const timeline = [
 const intentions = [
   {
     icon: <Users size={24} />,
-    title: 'Find Your Circle',
+    title: 'Find Friends',
     desc: 'Find people for genuine conversation, shared interests, and new experiences.',
   },
   {
