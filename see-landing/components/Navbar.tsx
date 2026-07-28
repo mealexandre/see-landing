@@ -4,6 +4,14 @@ import React from 'react';
 import { Eye } from 'lucide-react';
 
 export default function Navbar() {
+  const scrollToWaitlist = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.querySelector('#waitlist');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav style={{
       display: 'flex',
@@ -39,15 +47,14 @@ export default function Navbar() {
       {/* Links */}
       <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
         <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>About</a>
-        
-        {/* Team ლინკი */}
         <a href="#team" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Team</a>
-        
         <a href="#demo" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Demo</a>
         
-        <a href="#waitlist" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Early Access</a>
+        {/* ტექსტური Early Access ლინკი */}
+        <a href="#waitlist" onClick={scrollToWaitlist} style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Early Access</a>
         
-        <a href="#waitlist" style={{
+        {/* მთავარი Get Early Access ღილაკი */}
+        <a href="#waitlist" onClick={scrollToWaitlist} style={{
           backgroundColor: '#22988e',
           color: '#ffffff',
           padding: '0.5rem 1rem',
