@@ -155,7 +155,6 @@ function ParticleNetwork() {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
-        // ეს ნიღაბი ცენტრს (ტექსტის უკან) ასუფთავებს და წერტილებს მხოლოდ გვერდებზე ტოვებს
         WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 15%, black 65%)',
         maskImage: 'radial-gradient(ellipse at center, transparent 15%, black 65%)',
       }}
@@ -186,7 +185,8 @@ export default function Hero() {
           maxWidth: '850px', 
           margin: '0 auto', 
           zIndex: 1,
-          marginTop: '-8vh'
+          marginTop: '-8vh',
+          userSelect: 'none' // <--- ეს აგვარებს კურსორის და მონიშვნის პრობლემას
         }}
       >
         <motion.h1 variants={item} style={{ fontSize: '3.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
