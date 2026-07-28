@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Eye } from 'lucide-react';
 
@@ -14,7 +16,7 @@ export default function Navbar() {
       position: 'sticky',
       top: 0,
       zIndex: 100,
-      userSelect: 'none' // <--- დაემატა ტექსტის მონიშვნის გამოსართავად
+      userSelect: 'none'
     }}>
       {/* Logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -39,10 +41,8 @@ export default function Navbar() {
         <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>About</a>
         <a href="#demo" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Demo</a>
         
-        {/* აქ შეიცვალა ტექსტი */}
         <a href="#waitlist" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Early Access</a>
         
-        {/* აქაც შეიცვალა ტექსტი */}
         <a href="#waitlist" style={{
           backgroundColor: '#22988e',
           color: '#ffffff',
