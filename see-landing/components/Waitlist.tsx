@@ -42,7 +42,7 @@ export default function Waitlist() {
   };
 
   return (
-    <section id="waitlist" style={{ backgroundColor: '#0f172a', padding: '6rem 1.5rem', position: 'relative', overflow: 'hidden' }}>
+    <section id="waitlist" style={{ backgroundColor: '#0f172a', padding: '6rem 1.5rem', position: 'relative', overflow: 'hidden', userSelect: 'none' }}>
       {/* Ambient glow behind the card */}
       <div style={{
         position: 'absolute',
@@ -95,8 +95,8 @@ export default function Waitlist() {
         <h2 style={{ fontSize: '2.25rem', fontWeight: 600, color: '#ffffff', marginBottom: '0.75rem', letterSpacing: '-0.025em' }}>
           Ready to find your space?
         </h2>
-        <p style={{ color: '#94a3b8', fontSize: '1rem', marginBottom: '2.25rem', maxWidth: '24rem', margin: '0 auto 2.25rem auto' }}>
-          Join the waitlist and we'll let you know the moment SEE opens up near you.
+        <p style={{ color: '#94a3b8', fontSize: '1rem', marginBottom: '2.25rem', maxWidth: '28rem', margin: '0 auto 2.25rem auto', lineHeight: '1.5' }}>
+          Get early access and be the first to experience SEE when it opens up near you.
         </p>
 
         <AnimatePresence mode="wait">
@@ -192,7 +192,7 @@ export default function Waitlist() {
                   <Loader2 size={16} className="animate-spin" />
                 ) : (
                   <>
-                    Join Waitlist <ArrowRight size={15} />
+                    Get Early Access <ArrowRight size={15} />
                   </>
                 )}
               </button>
