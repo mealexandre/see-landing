@@ -166,6 +166,39 @@ function StorySection() {
         }}
       />
 
+      <style>{`
+        @keyframes timelineGlow {
+          0%, 8%    { opacity: 0.45; box-shadow: 0 0 0 4px rgba(71,189,178,0.15); transform: scale(1); }
+          16%, 25%  { opacity: 1; box-shadow: 0 0 16px 5px rgba(71,189,178,0.55), 0 0 0 4px rgba(71,189,178,0.3); transform: scale(1.2); }
+          33%, 100% { opacity: 0.45; box-shadow: 0 0 0 4px rgba(71,189,178,0.15); transform: scale(1); }
+        }
+
+        @keyframes timelineBoxGlow {
+          0%, 8%    { border-color: rgba(255,255,255,0.08); box-shadow: none; }
+          16%, 25%  { border-color: rgba(71,189,178,0.5); box-shadow: 0 0 28px rgba(71,189,178,0.16); }
+          33%, 100% { border-color: rgba(255,255,255,0.08); box-shadow: none; }
+        }
+
+        .timeline-row:hover .timeline-dot {
+          animation-play-state: paused;
+          opacity: 1 !important;
+          transform: scale(1.2) !important;
+          box-shadow: 0 0 16px 5px rgba(71,189,178,0.55), 0 0 0 4px rgba(71,189,178,0.3) !important;
+        }
+
+        .timeline-row:hover .timeline-box {
+          animation-play-state: paused;
+          border-color: rgba(71,189,178,0.5) !important;
+          box-shadow: 0 0 28px rgba(71,189,178,0.16) !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .timeline-dot, .timeline-box {
+            animation: none !important;
+          }
+        }
+      `}</style>
+
       <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={container}>
           <Eyebrow label="Our Story" />
@@ -205,9 +238,10 @@ function StorySection() {
           {/* Right: timeline */}
           <div>
             {timeline.map((t, i) => (
-              <motion.div key={t.year} variants={item} style={{ display: 'flex', gap: '1.25rem' }}>
+              <motion.div key={t.year} variants={item} className="timeline-row" style={{ display: 'flex', gap: '1.25rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '10px', flexShrink: 0 }}>
                   <div
+                    className="timeline-dot"
                     style={{
                       width: '10px',
                       height: '10px',
@@ -216,6 +250,8 @@ function StorySection() {
                       boxShadow: '0 0 0 4px rgba(71,189,178,0.15)',
                       marginTop: '1.6rem',
                       flexShrink: 0,
+                      animation: 'timelineGlow 6s ease-in-out infinite',
+                      animationDelay: `${i * 2}s`,
                     }}
                   />
                   {i < timeline.length - 1 && (
@@ -231,6 +267,7 @@ function StorySection() {
                 </div>
 
                 <div
+                  className="timeline-box"
                   style={{
                     background: 'rgba(255, 255, 255, 0.03)',
                     backdropFilter: 'blur(20px)',
@@ -239,6 +276,8 @@ function StorySection() {
                     padding: '1.5rem',
                     marginBottom: i < timeline.length - 1 ? '1.5rem' : 0,
                     flex: 1,
+                    animation: 'timelineBoxGlow 6s ease-in-out infinite',
+                    animationDelay: `${i * 2}s`,
                   }}
                 >
                   <span style={{ fontFamily: 'monospace', fontSize: '13px', color: '#47bdb2', letterSpacing: '0.05em' }}>
