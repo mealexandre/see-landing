@@ -42,13 +42,12 @@ export default function Navbar() {
         <div style={{
           width: '32px',
           height: '32px',
-          position: 'relative',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0
         }}>
-          <Image src="/logo.png" alt="SEE Logo" fill style={{ objectFit: 'contain' }} />
+          <Image src="/logo.png" alt="SEE Logo" width={32} height={32} style={{ objectFit: 'contain' }} />
         </div>
         <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '1.25rem', letterSpacing: '-0.03em' }}>
           SEE
