@@ -270,7 +270,7 @@ export default function Hero() {
         >
           SEE matches you into curated micro-groups based on shared interests,
           values, goals, and skills. Choose your intention whether you're building a
-          startup or finding new friends.
+          team or finding new friends.
         </p>
 
         <div className="see-connect-box">
