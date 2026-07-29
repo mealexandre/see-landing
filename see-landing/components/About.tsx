@@ -179,15 +179,26 @@ function StorySection() {
           33%, 100% { border-color: rgba(255,255,255,0.08); box-shadow: none; }
         }
 
+        .timeline-list:hover .timeline-dot {
+          animation-play-state: paused !important;
+          opacity: 0.45 !important;
+          transform: scale(1) !important;
+          box-shadow: 0 0 0 4px rgba(71,189,178,0.15) !important;
+        }
+
+        .timeline-list:hover .timeline-box {
+          animation-play-state: paused !important;
+          border-color: rgba(255,255,255,0.08) !important;
+          box-shadow: none !important;
+        }
+
         .timeline-row:hover .timeline-dot {
-          animation-play-state: paused;
           opacity: 1 !important;
           transform: scale(1.2) !important;
           box-shadow: 0 0 16px 5px rgba(71,189,178,0.55), 0 0 0 4px rgba(71,189,178,0.3) !important;
         }
 
         .timeline-row:hover .timeline-box {
-          animation-play-state: paused;
           border-color: rgba(71,189,178,0.5) !important;
           box-shadow: 0 0 28px rgba(71,189,178,0.16) !important;
         }
@@ -236,7 +247,7 @@ function StorySection() {
           </div>
 
           {/* Right: timeline */}
-          <div>
+          <div className="timeline-list">
             {timeline.map((t, i) => (
               <motion.div key={t.year} variants={item} className="timeline-row" style={{ display: 'flex', gap: '1.25rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '10px', flexShrink: 0 }}>
