@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Eye } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navbar() {
   const scrollToWaitlist = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -33,30 +33,29 @@ export default function Navbar() {
       flexWrap: 'wrap',
       gap: '0.75rem'
     }}>
-      {/* Logo — კლიკზე აბრუნებს ზემოთ */}
+      {/* Logo + SEE Text — კლიკზე აბრუნებს ზემოთ */}
       <a 
         href="#" 
         onClick={scrollToTop} 
-        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', cursor: 'pointer' }}
+        style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none', cursor: 'pointer' }}
       >
         <div style={{
           width: '32px',
           height: '32px',
-          borderRadius: '50%',
-          backgroundColor: '#22988e',
+          position: 'relative',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0
         }}>
-          <Eye size={18} color="#ffffff" />
+          <Image src="/logo.png" alt="SEE Logo" fill style={{ objectFit: 'contain' }} />
         </div>
-        <span style={{ color: '#ffffff', fontWeight: 'bold', fontSize: '1.2rem', letterSpacing: '-0.05em' }}>
+        <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '1.25rem', letterSpacing: '-0.03em' }}>
           SEE
         </span>
       </a>
 
-      {/* Links — მობილურზე ოპტიმიზებული ზომებით და ინტერვალებით */}
+      {/* Links */}
       <div style={{ 
         display: 'flex', 
         gap: 'clamp(0.75rem, 2vw, 1.5rem)', 
@@ -66,8 +65,6 @@ export default function Navbar() {
         <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>About</a>
         <a href="#team" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Team</a>
         <a href="#demo" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Demo</a>
-        
-        {/* Early Access ლინკი (Get Early Access ღილაკი ამოღებულია ნავიგაციიდან) */}
         <a href="#waitlist" onClick={scrollToWaitlist} style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#94a3b8'}>Early Access</a>
       </div>
     </nav>

@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Eye, Mail } from 'lucide-react';
+import Image from 'next/image';
+import { Mail } from 'lucide-react';
 
 /* TikTok Icon */
 function TikTokIcon({ size = 18, color = 'currentColor', strokeWidth = 2 }: { size?: number; color?: string; strokeWidth?: number }) {
@@ -92,8 +93,8 @@ export default function Footer() {
           
           <div style={{ maxWidth: '320px' }}>
             <button onClick={scrollToTop} aria-label="Scroll to top" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', background: 'none', border: 'none', padding: 0, marginBottom: '1.25rem', cursor: 'pointer' }}>
-              <div style={{ width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to bottom right, #47bdb2, #22988e)', boxShadow: '0 0 15px rgba(34, 152, 142, 0.4)', flexShrink: 0 }}>
-                <Eye size={16} color="#0f172a" strokeWidth={2.5} />
+              <div style={{ width: '32px', height: '32px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Image src="/logo.png" alt="SEE Logo" fill style={{ objectFit: 'contain' }} />
               </div>
               <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '1.1rem', letterSpacing: '-0.025em' }}>
                 SEE
