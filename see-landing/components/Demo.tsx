@@ -18,7 +18,7 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-export default function Demo({ videoSrc }: DemoProps) {
+export default function Demo({ videoSrc = 'https://www.youtube.com/embed/n0v4iKcuBoQ' }: DemoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const showVideo = Boolean(videoSrc) && isPlaying;
 
@@ -77,7 +77,13 @@ export default function Demo({ videoSrc }: DemoProps) {
           }}
         >
           {showVideo ? (
-            <video src={videoSrc} controls autoPlay style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <iframe
+              src={`${videoSrc}?autoplay=1&rel=0`}
+              title="SEE demo video"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              style={{ width: '100%', height: '100%', border: 'none' }}
+            />
           ) : (
             <>
               {/* Abstract drifting gradient blobs */}
@@ -185,7 +191,7 @@ export default function Demo({ videoSrc }: DemoProps) {
                 gap: '0.25rem'
               }}
             >
-              Get early access → {/* <--- აქ შეიცვალა ტექსტი */}
+              Get early access →
             </button>
           </p>
         </div>
