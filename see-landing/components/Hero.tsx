@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react';
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // უკანა ფონის მოძრავი ქსელის ანიმაცია (Canvas)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -102,13 +101,13 @@ export default function Hero() {
     <section
       style={{
         position: 'relative',
-        minHeight: '100vh', // ოდნავ გავზარდეთ სექცია რომ ცენტრში კარგად დაჯდეს
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#0f172a',
-        padding: '2rem 1.5rem', // შევამცირეთ padding ზემოთ-ქვემოთ
+        padding: '0 1.5rem',
         overflow: 'hidden',
         textAlign: 'center',
       }}
@@ -127,7 +126,15 @@ export default function Hero() {
       />
 
       <style>{`
-        /* ბოქსის მთავარი სტილი */
+        /* კონტენტის wrapper მობილურისა და დესკტოპის ბალანსისთვის */
+        .content-wrapper {
+          position: relative;
+          z-index: 1;
+          max-width: 800px;
+          margin: 0 auto;
+          margin-top: -12vh; /* მობილურზე ოდნავ მეტად იწევა ზემოთ */
+        }
+
         .see-connect-box {
           position: relative;
           background-color: rgba(15, 23, 42, 0.65);
@@ -137,7 +144,7 @@ export default function Hero() {
           cursor: default;
           border: 1px solid rgba(255, 255, 255, 0.1);
           transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-          overflow: hidden; /* შიდა ნათებამ რომ არ გადააჭარბოს */
+          overflow: hidden; 
         }
         
         .see-connect-box:hover {
@@ -146,26 +153,31 @@ export default function Hero() {
           box-shadow: 0 0 30px rgba(71, 189, 178, 0.18);
         }
 
-        /* რესპონსიული შიდა განლაგება */
         .box-inner {
           display: flex;
           flex-direction: column;
           align-items: center;
           padding: 2rem;
           position: relative;
-          zIndex: 1;
+          z-index: 1;
         }
 
         .svg-wrapper {
-          margin-bottom: 1rem;
+          margin-bottom: 1.25rem;
         }
         
         .text-wrapper {
           text-align: center;
         }
 
-        /* დესკტოპზე ხდება ჰორიზონტალური და სიგანეში იშლება! */
+        .rc-text {
+          display: block;
+        }
+
         @media (min-width: 768px) {
+          .content-wrapper {
+            margin-top: -8vh; /* დესკტოპზე ვინარჩუნებთ ძველ იდეალურ პოზიციას */
+          }
           .box-inner {
             flex-direction: row;
             padding: 1.5rem 3.5rem 1.5rem 2.5rem;
@@ -176,6 +188,10 @@ export default function Hero() {
           }
           .text-wrapper {
             text-align: left;
+            white-space: nowrap;
+          }
+          .rc-text {
+            display: inline;
           }
         }
 
@@ -225,9 +241,8 @@ export default function Hero() {
         }
       `}</style>
 
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
+      <div className="content-wrapper">
         
-        {/* მთავარი სათაური (ზომები ოდნავ დავაპატარავეთ დესკტოპისთვის) */}
         <h1
           style={{
             fontSize: 'clamp(2.2rem, 5vw, 4rem)',
@@ -242,7 +257,6 @@ export default function Hero() {
           Find your people.
         </h1>
 
-        {/* ქვესათაური (დაშორებები შევამცირეთ) */}
         <p
           style={{
             fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
@@ -258,10 +272,7 @@ export default function Hero() {
           startup or finding new friends.
         </p>
 
-        {/* განახლებული რესპონსიული ბოქსი */}
         <div className="see-connect-box">
-          
-          {/* შიდა განათება მთელ ბოქსზე */}
           <div
             className="see-glow"
             style={{
@@ -278,7 +289,6 @@ export default function Hero() {
           />
 
           <div className="box-inner">
-            {/* SVG ანიმაცია */}
             <div className="svg-wrapper">
               <svg
                 width="260"
@@ -317,10 +327,9 @@ export default function Hero() {
               </svg>
             </div>
 
-            {/* ტექსტი (წერტილი ამოღებულია!) */}
             <div className="text-wrapper" style={{ position: 'relative', zIndex: 1, fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.3 }}>
-              <span style={{ color: '#47bdb2', display: 'block' }}>Real connections</span>
-              <span style={{ color: '#e2e8f0', display: 'block' }}>start here</span>
+              <span className="rc-text" style={{ color: '#47bdb2' }}>Real connections </span>
+              <span className="rc-text" style={{ color: '#e2e8f0' }}>start here</span>
             </div>
           </div>
         </div>
