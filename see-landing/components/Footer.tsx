@@ -93,8 +93,8 @@ export default function Footer() {
           
           <div style={{ maxWidth: '320px' }}>
             <button onClick={scrollToTop} aria-label="Scroll to top" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', background: 'none', border: 'none', padding: 0, marginBottom: '1.25rem', cursor: 'pointer' }}>
-              <div style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <Image src="/logo.png" alt="SEE Logo" width={32} height={32} style={{ objectFit: 'contain' }} />
+              <div style={{ width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <Image src="/logo.png" alt="SEE Logo" width={40} height={40} style={{ objectFit: 'contain' }} />
               </div>
               <span style={{ color: '#ffffff', fontWeight: 600, fontSize: '1.1rem', letterSpacing: '-0.025em' }}>
                 SEE

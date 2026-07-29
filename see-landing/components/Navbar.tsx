@@ -40,14 +40,14 @@ export default function Navbar() {
         style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none', cursor: 'pointer' }}
       >
         <div style={{
-          width: '32px',
-          height: '32px',
+          width: '40px',
+          height: '40px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0
         }}>
-          <Image src="/logo.png" alt="SEE Logo" width={32} height={32} style={{ objectFit: 'contain' }} />
+          <Image src="/logo.png" alt="SEE Logo" width={40} height={40} priority style={{ objectFit: 'contain' }} />
         </div>
         <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '1.25rem', letterSpacing: '-0.03em' }}>
           SEE
