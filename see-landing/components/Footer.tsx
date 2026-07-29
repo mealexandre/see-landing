@@ -87,11 +87,60 @@ export default function Footer() {
 
   return (
     <footer style={{ backgroundColor: '#090d16', borderTop: '1px solid rgba(255, 255, 255, 0.08)', padding: '4.5rem 1.5rem 2rem', position: 'relative', zIndex: 10, userSelect: 'none' }}>
+      {/* Pure-CSS polish layer: kills the default mobile/desktop tap & focus
+          highlight box on links (the likely source of the "blue box"),
+          and adds a subtle animated underline + lift that inline styles
+          alone can't express (::after pseudo-elements, media queries). */}
+      <style>{`
+        .footer-link, .footer-social, .footer-logo-btn {
+          -webkit-tap-highlight-color: transparent;
+          outline: none;
+        }
+        .footer-link {
+          position: relative;
+        }
+        .footer-link::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          width: 0%;
+          height: 1px;
+          background-color: #47bdb2;
+          transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer-link:hover::after,
+        .footer-link:focus-visible::after {
+          width: 100%;
+        }
+        .footer-link:focus-visible,
+        .footer-social:focus-visible,
+        .footer-logo-btn:focus-visible {
+          box-shadow: 0 0 0 2px rgba(71, 189, 178, 0.45);
+          border-radius: 4px;
+        }
+        .footer-social {
+          transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease,
+            transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer-social:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 18px rgba(71, 189, 178, 0.18);
+        }
+        @media (max-width: 560px) {
+          .footer-bottom {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+        }
+      `}</style>
+
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '3rem', paddingBottom: '3rem', borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
           
           <div style={{ maxWidth: '320px' }}>
-            <button onClick={scrollToTop} aria-label="Scroll to top" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', background: 'none', border: 'none', padding: 0, marginBottom: '1.25rem', cursor: 'pointer' }}>
+            <button className="footer-logo-btn" onClick={scrollToTop} aria-label="Scroll to top" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', background: 'none', border: 'none', padding: 0, marginBottom: '1.25rem', cursor: 'pointer' }}>
               <div style={{ width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(to bottom right, #47bdb2, #22988e)', boxShadow: '0 0 15px rgba(34, 152, 142, 0.4)', flexShrink: 0 }}>
                 <Eye size={16} color="#0f172a" strokeWidth={2.5} />
               </div>
@@ -108,7 +157,7 @@ export default function Footer() {
             <ColumnTitle label="Quick Links" />
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {quickLinks.map((link) => (
-                <a key={link.label} href={link.href} onClick={(e) => handleNavClick(e, link.href)} style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9375rem', transition: 'color 0.2s ease', width: 'fit-content' }} onMouseOver={(e) => (e.currentTarget.style.color = '#47bdb2')} onMouseOut={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a key={link.label} className="footer-link" href={link.href} onClick={(e) => handleNavClick(e, link.href)} style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '0.9375rem', transition: 'color 0.2s ease', width: 'fit-content' }} onMouseOver={(e) => (e.currentTarget.style.color = '#47bdb2')} onMouseOut={(e) => (e.currentTarget.style.color = '#94a3b8')}>
                   {link.label}
                 </a>
               ))}
@@ -119,7 +168,7 @@ export default function Footer() {
             <ColumnTitle label="Contact" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
               {contactDetails.map(({ label, href, Icon }) => (
-                <a key={label} href={href} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', color: '#94a3b8', textDecoration: 'none', fontSize: '0.9375rem', transition: 'color 0.2s ease', width: 'fit-content' }} onMouseOver={(e) => (e.currentTarget.style.color = '#47bdb2')} onMouseOut={(e) => (e.currentTarget.style.color = '#94a3b8')}>
+                <a key={label} className="footer-link" href={href} style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', color: '#94a3b8', textDecoration: 'none', fontSize: '0.9375rem', transition: 'color 0.2s ease', width: 'fit-content' }} onMouseOver={(e) => (e.currentTarget.style.color = '#47bdb2')} onMouseOut={(e) => (e.currentTarget.style.color = '#94a3b8')}>
                   <Icon size={16} />
                   <span>{label}</span>
                 </a>
@@ -128,14 +177,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.25rem', paddingTop: '2rem' }}>
+        <div className="footer-bottom" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.25rem', paddingTop: '2rem' }}>
           <p style={{ color: '#64748b', fontSize: '0.875rem', margin: 0 }}>
             &copy; {currentYear} SEE. All rights reserved.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             {socialLinks.map(({ label, href, Icon }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(20px)', transition: 'color 0.2s ease, border-color 0.2s ease, background 0.2s ease' }} onMouseOver={(e) => { e.currentTarget.style.color = '#47bdb2'; e.currentTarget.style.borderColor = 'rgba(71, 189, 178, 0.4)'; e.currentTarget.style.background = 'rgba(71, 189, 178, 0.08)'; }} onMouseOut={(e) => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)'; }}>
+              <a key={label} className="footer-social" href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', color: '#94a3b8', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(20px)' }} onMouseOver={(e) => { e.currentTarget.style.color = '#47bdb2'; e.currentTarget.style.borderColor = 'rgba(71, 189, 178, 0.4)'; e.currentTarget.style.background = 'rgba(71, 189, 178, 0.08)'; }} onMouseOut={(e) => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'; e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)'; }}>
                 <Icon size={17} />
               </a>
             ))}
