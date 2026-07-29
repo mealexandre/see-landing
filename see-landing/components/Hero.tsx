@@ -13,7 +13,6 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-// Brand teal as an RGB triplet so it can be reused inside rgba() at varying opacities
 const PARTICLE_RGB = '71, 189, 178';
 
 type Particle = {
@@ -34,7 +33,6 @@ function ParticleNetwork() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Respect users who've asked for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let frameId = 0;
@@ -55,7 +53,6 @@ function ParticleNetwork() {
     };
 
     const createParticles = () => {
-      // Density scales gently with viewport size, capped so it never feels busy
       const count = Math.min(70, Math.max(24, Math.round((width * height) / 18000)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
@@ -89,7 +86,6 @@ function ParticleNetwork() {
     };
 
     if (prefersReducedMotion) {
-      // Render a single calm frame instead of animating
       drawStaticFrame();
       return () => window.removeEventListener('resize', handleResize);
     }
@@ -155,8 +151,8 @@ function ParticleNetwork() {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
-        WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 15%, black 65%)',
-        maskImage: 'radial-gradient(ellipse at center, transparent 15%, black 65%)',
+        WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 10%, black 75%)',
+        maskImage: 'radial-gradient(ellipse at center, transparent 10%, black 75%)',
       }}
     />
   );
@@ -172,7 +168,7 @@ export default function Hero() {
       justifyContent: 'center',
       overflow: 'hidden',
       backgroundColor: '#0f172a',
-      padding: '4rem 1.5rem'
+      padding: '3rem 1rem'
     }}>
       <ParticleNetwork />
 
@@ -185,15 +181,30 @@ export default function Hero() {
           maxWidth: '850px', 
           margin: '0 auto', 
           zIndex: 1,
-          marginTop: '-8vh',
-          userSelect: 'none' // <--- ეს აგვარებს კურსორის და მონიშვნის პრობლემას
+          userSelect: 'none',
+          width: '100%'
         }}
       >
-        <motion.h1 variants={item} style={{ fontSize: '3.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '1.5rem', letterSpacing: '-0.025em', lineHeight: '1.2' }}>
+        <motion.h1 variants={item} style={{ 
+          fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', 
+          fontWeight: 700, 
+          color: '#ffffff', 
+          marginBottom: '1.25rem', 
+          letterSpacing: '-0.025em', 
+          lineHeight: '1.15' 
+        }}>
           Find your space. <br /> Find your people.
         </motion.h1>
         
-        <motion.p variants={item} style={{ color: '#94a3b8', fontSize: '1.25rem', marginBottom: '2.5rem', maxWidth: '42rem', margin: '0 auto 2.5rem auto', lineHeight: '1.6' }}>
+        <motion.p variants={item} style={{ 
+          color: '#94a3b8', 
+          fontSize: 'clamp(1rem, 2vw, 1.25rem)', 
+          marginBottom: '2rem', 
+          maxWidth: '40rem', 
+          margin: '0 auto 2rem auto', 
+          lineHeight: '1.6',
+          padding: '0 0.5rem'
+        }}>
           SEE matches you into curated micro-groups based on shared interests, values, goals, and skills. Choose your intention whether you're building a startup or finding new friends, real connections start here.
         </motion.p>
 
@@ -236,15 +247,14 @@ export default function Hero() {
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
-            padding: '1.125rem 1.5rem',
+            padding: '1rem 1.25rem',
             borderRadius: '20px',
             background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
             backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
-            width: '320px',
-            minHeight: '112px',
+            width: '300px',
             maxWidth: '100%',
             boxSizing: 'border-box'
           }}>
@@ -253,15 +263,15 @@ export default function Hero() {
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              width: '48px',
-              height: '48px',
+              width: '44px',
+              height: '44px',
               borderRadius: '12px',
               background: 'rgba(71, 189, 178, 0.08)',
-              fontSize: '1.5rem'
+              fontSize: '1.35rem'
             }}>🤝</span>
             <div>
-              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.2rem', letterSpacing: '-0.01em' }}>Friends</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.45' }}>For genuine conversation & shared experiences</div>
+              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.15rem', letterSpacing: '-0.01em' }}>Friends</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.8rem', lineHeight: '1.4' }}>For genuine conversation & shared experiences</div>
             </div>
           </div>
           
@@ -270,15 +280,14 @@ export default function Hero() {
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
-            padding: '1.125rem 1.5rem',
+            padding: '1rem 1.25rem',
             borderRadius: '20px',
             background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
             backdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
             textAlign: 'left',
-            width: '320px',
-            minHeight: '112px',
+            width: '300px',
             maxWidth: '100%',
             boxSizing: 'border-box'
           }}>
@@ -287,15 +296,15 @@ export default function Hero() {
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
-              width: '48px',
-              height: '48px',
+              width: '44px',
+              height: '44px',
               borderRadius: '12px',
               background: 'rgba(71, 189, 178, 0.08)',
-              fontSize: '1.5rem'
+              fontSize: '1.35rem'
             }}>💼</span>
             <div>
-              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '1rem', marginBottom: '0.2rem', letterSpacing: '-0.01em' }}>Professional</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.45' }}>For collaborators & builders</div>
+              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.15rem', letterSpacing: '-0.01em' }}>Professional</div>
+              <div style={{ color: '#94a3b8', fontSize: '0.8rem', lineHeight: '1.4' }}>For collaborators & builders</div>
             </div>
           </div>
         </motion.div>
