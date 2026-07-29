@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: "Connecting people through meaningful small-group experiences.",
   icons: {
     icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 };
 
