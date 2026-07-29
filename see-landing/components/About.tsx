@@ -47,7 +47,7 @@ const timeline = [
   {
     year: '2026',
     title: 'SEE',
-    desc: 'Building the technology to scale meaningful connections',
+    desc: 'Official launch as a technology startup, building platforms to scale meaningful connections.',
   },
 ];
 
