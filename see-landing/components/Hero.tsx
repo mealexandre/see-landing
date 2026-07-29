@@ -1,315 +1,197 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
-};
-
-const PARTICLE_RGB = '71, 189, 178';
-
-type Particle = {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  r: number;
-};
-
-function ParticleNetwork() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let frameId = 0;
-    let width = 0;
-    let height = 0;
-    let particles: Particle[] = [];
-
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const LINK_DISTANCE = 140;
-
-    const setSize = () => {
-      const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      canvas.width = width * DPR;
-      canvas.height = height * DPR;
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    };
-
-    const createParticles = () => {
-      const count = Math.min(70, Math.max(24, Math.round((width * height) / 18000)));
-      particles = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
-        r: Math.random() * 1.2 + 0.6,
-      }));
-    };
-
-    setSize();
-    createParticles();
-
-    const handleResize = () => {
-      setSize();
-      particles.forEach((p) => {
-        p.x = Math.min(p.x, width);
-        p.y = Math.min(p.y, height);
-      });
-    };
-    window.addEventListener('resize', handleResize);
-
-    const drawStaticFrame = () => {
-      ctx.clearRect(0, 0, width, height);
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${PARTICLE_RGB}, 0.4)`;
-        ctx.fill();
-      }
-    };
-
-    if (prefersReducedMotion) {
-      drawStaticFrame();
-      return () => window.removeEventListener('resize', handleResize);
-    }
-
-    const tick = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x <= 0 || p.x >= width) p.vx *= -1;
-        if (p.y <= 0 || p.y >= height) p.vy *= -1;
-
-        p.x = Math.max(0, Math.min(width, p.x));
-        p.y = Math.max(0, Math.min(height, p.y));
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${PARTICLE_RGB}, 0.45)`;
-        ctx.fill();
-      }
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const a = particles[i];
-          const b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < LINK_DISTANCE) {
-            const opacity = (1 - dist / LINK_DISTANCE) * 0.32;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${PARTICLE_RGB}, ${opacity})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-
-      frameId = requestAnimationFrame(tick);
-    };
-
-    frameId = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      style={{
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-        pointerEvents: 'none',
-        WebkitMaskImage: 'radial-gradient(ellipse at center, transparent 10%, black 75%)',
-        maskImage: 'radial-gradient(ellipse at center, transparent 10%, black 75%)',
-      }}
-    />
-  );
-}
+import React from 'react';
 
 export default function Hero() {
   return (
     <section style={{
       position: 'relative',
-      minHeight: 'calc(100vh - 70px)',
+      minHeight: '80vh',
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      overflow: 'hidden',
       backgroundColor: '#0f172a',
-      padding: '3rem 1rem'
+      padding: '4rem 1.5rem',
+      overflow: 'hidden',
+      textAlign: 'center'
     }}>
-      <ParticleNetwork />
+      {/* ანიმაციის სტილები (CSS) */}
+      <style>{`
+        .see-connect-box {
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .see-connect-box:hover {
+          transform: translateY(-3px);
+          border-color: rgba(71, 189, 178, 0.45);
+          box-shadow: 0 0 30px rgba(71, 189, 178, 0.18);
+        }
 
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={container}
-        style={{ 
-          textAlign: 'center', 
-          maxWidth: '850px', 
-          margin: '0 auto', 
-          zIndex: 1,
-          userSelect: 'none',
-          width: '100%'
-        }}
-      >
-        <motion.h1 variants={item} style={{ 
-          fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', 
-          fontWeight: 700, 
-          color: '#ffffff', 
-          marginBottom: '1.25rem', 
-          letterSpacing: '-0.025em', 
-          lineHeight: '1.15' 
-        }}>
-          Find your space. <br /> Find your people.
-        </motion.h1>
+        @keyframes seeBgPulse {
+          0%, 100% { opacity: 0.3; transform: scale(0.9); }
+          50% { opacity: 0.6; transform: scale(1.05); }
+        }
         
-        <motion.p variants={item} style={{ 
-          color: '#94a3b8', 
-          fontSize: 'clamp(1rem, 2vw, 1.25rem)', 
-          marginBottom: '2rem', 
-          maxWidth: '40rem', 
-          margin: '0 auto 2rem auto', 
-          lineHeight: '1.6',
-          padding: '0 0.5rem'
+        /* ანიმაციის მანძილი გაიზარდა (stroke-dashoffset: 150), რადგან ქსელი უფრო განიერია */
+        @keyframes seeLineDraw {
+          0%   { stroke-dashoffset: 150; opacity: 0; }
+          10%  { opacity: 1; }
+          22%  { stroke-dashoffset: 0; opacity: 1; }
+          78%  { stroke-dashoffset: 0; opacity: 1; }
+          92%  { opacity: 0; }
+          100% { stroke-dashoffset: 150; opacity: 0; }
+        }
+        
+        @keyframes seeNodePulse {
+          0%, 15%  { opacity: 0.25; transform: scale(0.85); }
+          25%, 75% { opacity: 1; transform: scale(1); }
+          90%, 100%{ opacity: 0.25; transform: scale(0.85); }
+        }
+        @keyframes seeCenterBreathe {
+          0%, 100% { transform: scale(1); }
+          50%      { transform: scale(1.12); }
+        }
+
+        .see-connect-box:hover .see-line {
+          animation-play-state: paused;
+          stroke-dashoffset: 0 !important;
+          opacity: 1 !important;
+        }
+        .see-connect-box:hover .see-node {
+          animation-play-state: paused;
+          opacity: 1 !important;
+          transform: scale(1) !important;
+          fill: #47bdb2 !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .see-line, .see-node, .see-center-node, .see-glow {
+            animation: none !important;
+            opacity: 1 !important;
+            stroke-dashoffset: 0 !important;
+          }
+        }
+      `}</style>
+
+      {/* ფონის მსუბუქი ბადე */}
+      <div style={{
+        position: 'absolute',
+        top: 0, left: 0, right: 0, bottom: 0,
+        backgroundImage: 'radial-gradient(circle at center, rgba(71, 189, 178, 0.05) 0%, transparent 70%)',
+        zIndex: 0
+      }} />
+
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
+        
+        {/* მთავარი სათაური */}
+        <h1 style={{
+          fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+          fontWeight: 800,
+          color: '#ffffff',
+          lineHeight: 1.1,
+          letterSpacing: '-0.02em',
+          marginBottom: '1.5rem'
         }}>
-          SEE matches you into curated micro-groups based on shared interests, values, goals, and skills. Choose your intention whether you're building a startup or finding new friends, real connections start here.
-        </motion.p>
+          Find your space.<br />
+          Find your people.
+        </h1>
 
-        {/* Intention Buttons / UI Cards */}
-        <motion.div variants={item} style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          justifyContent: 'center',
-          alignItems: 'center'
+        {/* ქვესათაური */}
+        <p style={{
+          fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+          color: '#94a3b8',
+          lineHeight: 1.6,
+          marginBottom: '3.5rem',
+          maxWidth: '700px',
+          margin: '0 auto 3.5rem'
         }}>
-          <style>{`
-            .intention-card {
-              position: relative;
-              cursor: pointer;
-              transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                          border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                          box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                          background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-              will-change: transform;
-            }
-            .intention-card:hover {
-              transform: translateY(-4px) scale(1.02);
-              border-color: rgba(71, 189, 178, 0.55);
-              background: linear-gradient(135deg, rgba(71, 189, 178, 0.09), rgba(255, 255, 255, 0.035));
-              box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(71, 189, 178, 0.12), 0 0 24px rgba(71, 189, 178, 0.12);
-            }
-            .intention-card:hover .intention-card-icon {
-              background: rgba(71, 189, 178, 0.18);
-              transform: scale(1.06);
-            }
-            .intention-card-icon {
-              transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.35s ease;
-            }
-          `}</style>
+          SEE matches you into curated micro-groups based on shared interests,
+          values, goals, and skills. Choose your intention whether you're building a
+          startup or finding new friends.
+        </p>
 
-          {/* Friends Card */}
-          <div className="intention-card" style={{
-            display: 'flex',
+        {/* სრულად ასიმეტრიული და ორგანული ქსელის ბოქსი */}
+        <div
+          className="see-connect-box"
+          style={{
+            position: 'relative',
+            display: 'inline-flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            gap: '1rem',
-            padding: '1rem 1.25rem',
-            borderRadius: '20px',
-            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
-            textAlign: 'left',
-            width: '300px',
-            maxWidth: '100%',
-            boxSizing: 'border-box'
-          }}>
-            <span className="intention-card-icon" style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              width: '44px',
-              height: '44px',
-              borderRadius: '12px',
-              background: 'rgba(71, 189, 178, 0.08)',
-              fontSize: '1.35rem'
-            }}>🤝</span>
-            <div>
-              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.15rem', letterSpacing: '-0.01em' }}>Friends</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.8rem', lineHeight: '1.4' }}>For genuine conversation & shared experiences</div>
-            </div>
-          </div>
-          
-          {/* Professional Card */}
-          <div className="intention-card" style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem',
-            padding: '1rem 1.25rem',
-            borderRadius: '20px',
-            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
-            textAlign: 'left',
-            width: '300px',
-            maxWidth: '100%',
-            boxSizing: 'border-box'
-          }}>
-            <span className="intention-card-icon" style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-              width: '44px',
-              height: '44px',
-              borderRadius: '12px',
-              background: 'rgba(71, 189, 178, 0.08)',
-              fontSize: '1.35rem'
-            }}>💼</span>
-            <div>
-              <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '0.95rem', marginBottom: '0.15rem', letterSpacing: '-0.01em' }}>Professional</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.8rem', lineHeight: '1.4' }}>For collaborators & builders</div>
-            </div>
-          </div>
-        </motion.div>
+            justifyContent: 'center',
+            padding: '2.25rem 3rem 2rem',
+            backgroundColor: 'rgba(15, 23, 42, 0.6)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderRadius: '24px',
+            cursor: 'default',
+          }}
+        >
+          {/* ambient glow: ახლა უფრო განიერია, რომ მთლიან ქსელს მოედოს */}
+          <div
+            className="see-glow"
+            style={{
+              position: 'absolute',
+              top: '15%',
+              left: '50%',
+              width: '240px',
+              height: '150px',
+              transform: 'translateX(-50%)',
+              background: 'radial-gradient(ellipse, rgba(71,189,178,0.25) 0%, transparent 70%)',
+              filter: 'blur(20px)',
+              animation: 'seeBgPulse 4s ease-in-out infinite',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
 
-      </motion.div>
+          {/* ასიმეტრიული SVG, სიგანე გაიზარდა 260-მდე რომ კუთხეები შეივსოს */}
+          <svg width="260" height="160" viewBox="0 0 260 160" style={{ position: 'relative', zIndex: 1, marginBottom: '1.25rem' }}>
+            
+            {/* ხაზები შენი მთავარი წერტილიდან (რომელიც ახლა ასიმეტრიულად 80, 100 კოორდინატზეა) */}
+            <line className="see-line" x1="80" y1="100" x2="20" y2="30" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0s' }} />
+            <line className="see-line" x1="80" y1="100" x2="120" y2="20" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.2s' }} />
+            <line className="see-line" x1="80" y1="100" x2="150" y2="90" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.35s' }} />
+            <line className="see-line" x1="80" y1="100" x2="35" y2="140" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.6s' }} />
+            <line className="see-line" x1="80" y1="100" x2="10" y2="85" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.8s' }} />
+
+            {/* შიდა კავშირები (თანამოაზრეები ერთმანეთს უკავშირდებიან მთელ სივრცეში) */}
+            <line className="see-line" x1="20" y1="30" x2="120" y2="20" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.2s' }} />
+            <line className="see-line" x1="20" y1="30" x2="10" y2="85" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.4s' }} />
+            <line className="see-line" x1="35" y1="140" x2="10" y2="85" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.6s' }} />
+            
+            {/* მარჯვენა მხარეს გაშლილი კავშირები (რომ კუთხეები შეივსოს) */}
+            <line className="see-line" x1="120" y1="20" x2="150" y2="90" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.8s' }} />
+            <line className="see-line" x1="150" y1="90" x2="230" y2="40" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.0s' }} />
+            <line className="see-line" x1="150" y1="90" x2="245" y2="95" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.2s' }} />
+            <line className="see-line" x1="150" y1="90" x2="195" y2="145" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.4s' }} />
+            <line className="see-line" x1="230" y1="40" x2="245" y2="95" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.6s' }} />
+            <line className="see-line" x1="245" y1="95" x2="195" y2="145" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.8s' }} />
+
+            {/* გარე წერტილები განაწილებული სრულ სივრცეში */}
+            <circle className="see-node" cx="20" cy="30" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0s', transformOrigin: '20px 30px' }} />
+            <circle className="see-node" cx="120" cy="20" r="5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.2s', transformOrigin: '120px 20px' }} />
+            <circle className="see-node" cx="230" cy="40" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.4s', transformOrigin: '230px 40px' }} />
+            <circle className="see-node" cx="245" cy="95" r="5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.6s', transformOrigin: '245px 95px' }} />
+            <circle className="see-node" cx="195" cy="145" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.8s', transformOrigin: '195px 145px' }} />
+            <circle className="see-node" cx="35" cy="140" r="5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '1.0s', transformOrigin: '35px 140px' }} />
+            <circle className="see-node" cx="10" cy="85" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '1.2s', transformOrigin: '10px 85px' }} />
+            <circle className="see-node" cx="150" cy="90" r="5.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.35s', transformOrigin: '150px 90px' }} />
+
+            {/* შენი ცენტრალური წერტილი — ოდნავ მარცხნივ და ქვემოთ */}
+            <circle cx="80" cy="100" r="9" fill="rgba(71,189,178,0.2)" />
+            <circle className="see-center-node" cx="80" cy="100" r="6" fill="#47bdb2" style={{ animation: 'seeCenterBreathe 2.5s ease-in-out infinite', transformOrigin: '80px 100px' }} />
+          </svg>
+
+          {/* ტექსტი */}
+          <div style={{ position: 'relative', zIndex: 1, fontSize: 'clamp(1rem, 2vw, 1.2rem)', fontWeight: 600, letterSpacing: '-0.01em' }}>
+            <span style={{ color: '#47bdb2' }}>Real connections</span>
+            <span style={{ color: '#e2e8f0' }}> start here.</span>
+          </div>
+        </div>
+
+      </div>
     </section>
   );
 }
