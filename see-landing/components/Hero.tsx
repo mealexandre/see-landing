@@ -110,6 +110,7 @@ export default function Hero() {
         padding: '0 1.5rem',
         overflow: 'hidden',
         textAlign: 'center',
+        userSelect: 'none',
       }}
     >
       <canvas
