@@ -123,8 +123,8 @@ function LinkedInBadge({ href, name }: { href: string; name: string }) {
         position: 'absolute',
         bottom: '-2px',
         right: '-2px',
-        width: '32px',
-        height: '32px',
+        width: '36px',
+        height: '36px',
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
@@ -136,8 +136,8 @@ function LinkedInBadge({ href, name }: { href: string; name: string }) {
       }}
     >
       <svg
-        width="16"
-        height="16"
+        width="18"
+        height="18"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -236,16 +236,16 @@ export default function Team() {
               <div
                 style={{
                   position: 'relative',
-                  width: '100px',
-                  height: '100px',
+                  width: '116px',
+                  height: '116px',
                   marginBottom: '1.25rem',
                   flexShrink: 0,
                 }}
               >
                 <div
                   style={{
-                    width: '100px',
-                    height: '100px',
+                    width: '116px',
+                    height: '116px',
                     borderRadius: '50%',
                     overflow: 'hidden',
                     border: '2px solid rgba(71, 189, 178, 0.4)',
@@ -256,8 +256,8 @@ export default function Team() {
                   <img
                     src={member.avatar}
                     alt={member.name}
-                    width={100}
-                    height={100}
+                    width={116}
+                    height={116}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     draggable={false}
                   />
