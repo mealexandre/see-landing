@@ -24,38 +24,45 @@ interface TeamMember {
   name: string;
   role: string;
   avatar: string; // Unsplash placeholder — swap for the real headshot when ready
+  linkedin?: string; // LinkedIn profile URL — leave empty/undefined to hide the badge
 }
 
 const team: TeamMember[] = [
   {
     name: 'Alexander Pasieshvili',
     role: 'Founder & CEO',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
+    avatar: '/team/alexander.jpg',
+    linkedin: 'https://www.linkedin.com/in/alexander-pasieshvili/',
   },
   {
     name: 'Nika Ebralidze',
-    role: 'CTO / Technical Lead',
-    avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
+    role: 'CTO (Chief Technology Officer)',
+    avatar: '/team/nika.jpg',
+    linkedin: 'https://www.linkedin.com/in/nika-ebralidze',
   },
   {
     name: '[Placeholder Name]',
     role: 'COO (Chief Operating Officer)',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
+    linkedin: '', // TODO: add profile URL once hired
   },
   {
     name: '[Placeholder Name]',
     role: 'Marketing Lead',
     avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
+    linkedin: '', // TODO: add profile URL once hired
   },
   {
     name: '[Placeholder Name]',
     role: 'Full-Stack Developer',
     avatar: 'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
+    linkedin: '', // TODO: add profile URL once hired
   },
   {
     name: '[Placeholder Name]',
     role: 'Graphic & UI/UX Designer',
     avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
+    linkedin: '', // TODO: add profile URL once hired
   },
 ];
 
@@ -92,6 +99,58 @@ function Eyebrow({ label }: { label: string }) {
         {label}
       </span>
     </motion.div>
+  );
+}
+
+/* ---------------------------------------------------------------- */
+/*  LinkedIn badge — small circular icon docked on the avatar's edge */
+/* ---------------------------------------------------------------- */
+
+function LinkedInBadge({ href, name }: { href: string; name: string }) {
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${name} on LinkedIn`}
+      onClick={(e) => e.stopPropagation()}
+      initial={{ opacity: 0, scale: 0.6 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.12, backgroundColor: '#47bdb2' }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] as const }}
+      style={{
+        position: 'absolute',
+        bottom: '-2px',
+        right: '-2px',
+        width: '30px',
+        height: '30px',
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#0f172a',
+        border: '1.5px solid rgba(71, 189, 178, 0.6)',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.35)',
+        cursor: 'pointer',
+      }}
+    >
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ pointerEvents: 'none' }}
+      >
+        <rect x="2" y="9" width="4" height="12" rx="1" fill="#47bdb2" />
+        <circle cx="4" cy="4" r="2.4" fill="#47bdb2" />
+        <path
+          d="M9.5 9H13v2.1c.9-1.5 2.4-2.4 4.2-2.4 3.4 0 5.8 2.2 5.8 6.2V21h-4v-5.5c0-1.9-.7-3.2-2.4-3.2-1.3 0-2.1.9-2.4 1.7-.1.3-.2.8-.2 1.3V21h-4V9z"
+          fill="#47bdb2"
+        />
+      </svg>
+    </motion.a>
   );
 }
 
@@ -176,25 +235,35 @@ export default function Team() {
             >
               <div
                 style={{
+                  position: 'relative',
                   width: '88px',
                   height: '88px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
                   marginBottom: '1.25rem',
-                  border: '2px solid rgba(71, 189, 178, 0.4)',
-                  boxShadow: '0 0 0 4px rgba(71, 189, 178, 0.08)',
                   flexShrink: 0,
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={member.avatar}
-                  alt={member.name}
-                  width={88}
-                  height={88}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  draggable={false}
-                />
+                <div
+                  style={{
+                    width: '88px',
+                    height: '88px',
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    border: '2px solid rgba(71, 189, 178, 0.4)',
+                    boxShadow: '0 0 0 4px rgba(71, 189, 178, 0.08)',
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={member.avatar}
+                    alt={member.name}
+                    width={88}
+                    height={88}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    draggable={false}
+                  />
+                </div>
+
+                {member.linkedin && <LinkedInBadge href={member.linkedin} name={member.name} />}
               </div>
 
               <h3 style={{ color: '#ffffff', fontWeight: 600, fontSize: '1.0625rem', marginBottom: '0.4rem' }}>
