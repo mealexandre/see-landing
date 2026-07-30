@@ -38,7 +38,7 @@ const team: TeamMember[] = [
     name: 'Nika Ebralidze',
     role: 'CTO (Chief Technology Officer)',
     avatar: '/team/nika.jpg',
-    linkedin: 'https://www.linkedin.com/in/nika-ebralidze',
+    linkedin: 'https://www.linkedin.com/in/nika-ebralidze-812431329/',
   },
   {
     name: '[Placeholder Name]',
@@ -123,8 +123,8 @@ function LinkedInBadge({ href, name }: { href: string; name: string }) {
         position: 'absolute',
         bottom: '-2px',
         right: '-2px',
-        width: '30px',
-        height: '30px',
+        width: '32px',
+        height: '32px',
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
@@ -136,8 +136,8 @@ function LinkedInBadge({ href, name }: { href: string; name: string }) {
       }}
     >
       <svg
-        width="15"
-        height="15"
+        width="16"
+        height="16"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -236,16 +236,16 @@ export default function Team() {
               <div
                 style={{
                   position: 'relative',
-                  width: '88px',
-                  height: '88px',
+                  width: '100px',
+                  height: '100px',
                   marginBottom: '1.25rem',
                   flexShrink: 0,
                 }}
               >
                 <div
                   style={{
-                    width: '88px',
-                    height: '88px',
+                    width: '100px',
+                    height: '100px',
                     borderRadius: '50%',
                     overflow: 'hidden',
                     border: '2px solid rgba(71, 189, 178, 0.4)',
@@ -256,8 +256,8 @@ export default function Team() {
                   <img
                     src={member.avatar}
                     alt={member.name}
-                    width={88}
-                    height={88}
+                    width={100}
+                    height={100}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     draggable={false}
                   />
