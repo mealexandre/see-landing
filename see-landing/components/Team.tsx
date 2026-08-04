@@ -41,10 +41,10 @@ const team: TeamMember[] = [
     linkedin: 'https://www.linkedin.com/in/nika-ebralidze-812431329/',
   },
   {
-    name: '[Placeholder Name]',
+    name: 'Sophie Darchiashvili',
     role: 'COO (Chief Operating Officer)',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&q=80', // TODO: replace with real photo
-    linkedin: '', // TODO: add profile URL once hired
+    avatar: '/team/Sophie.jpg',
+    linkedin: 'https://www.linkedin.com/in/sophie-darchiashvili',
   },
   {
     name: '[Placeholder Name]',
