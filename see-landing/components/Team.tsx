@@ -35,16 +35,16 @@ const team: TeamMember[] = [
     linkedin: 'https://www.linkedin.com/in/alexander-pasieshvili/',
   },
   {
+    name: 'Sophie Darchiashvili',
+    role: 'COO (Chief Operating Officer)',
+    avatar: '/team/Sophie.jpg',
+    linkedin: 'https://www.linkedin.com/in/sophie-darchiashvili-2582031a9/',
+  },
+  {
     name: 'Nika Ebralidze',
     role: 'CTO (Chief Technology Officer)',
     avatar: '/team/nika.jpg',
     linkedin: 'https://www.linkedin.com/in/nika-ebralidze-812431329/',
-  },
-  {
-    name: 'Sophie Darchiashvili',
-    role: 'COO (Chief Operating Officer)',
-    avatar: '/team/Sophie.jpg',
-    linkedin: 'https://www.linkedin.com/in/sophie-darchiashvili',
   },
   {
     name: '[Placeholder Name]',
