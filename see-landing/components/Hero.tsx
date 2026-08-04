@@ -206,11 +206,14 @@ export default function Hero() {
           }
           .box-inner {
             flex-direction: row;
-            padding: 1.5rem 3.5rem 1.5rem 2.5rem;
+            justify-content: center; /* დესკტოპზე ცენტრში აყენებს ლოგოს და ტექსტს */
+            align-items: center;
+            padding: 1.5rem 2rem; /* სიმეტრიული დაშორება */
+            width: 100%;
           }
           .svg-wrapper {
             margin-bottom: 0;
-            margin-right: 1.5rem;
+            margin-right: 2.5rem; /* ტექსტსა და ლოგოს შორის დაშორება */
           }
           .logo-frame {
             width: 128px;
@@ -317,7 +320,6 @@ export default function Hero() {
                 <img src="/see-logo.png" alt="SEE logo" />
 
                 <svg viewBox="0 0 1508 2328" xmlns="http://www.w3.org/2000/svg">
-                  {/* მთავარი ხაზები გასწორდა თეთრ ფერზე */}
                   <line className="see-line" x1="1389" y1="95"   x2="1357" y2="482"  stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0s' }} />
                   <line className="see-line" x1="1357" y1="482"  x2="73"   y2="1207" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.2s' }} />
                   <line className="see-line" x1="73"   y1="1207" x2="123"  y2="726"  stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.4s' }} />
@@ -328,16 +330,13 @@ export default function Hero() {
                   <line className="see-line" x1="82"   y1="2236" x2="263"  y2="1311" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.2s' }} />
                   <line className="see-line" x1="263"  y1="1311" x2="1432" y2="1033" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.4s' }} />
 
-                  {/* შიდა ხაზებიც ოდნავ გამჭვირვალე თეთრით */}
                   <line className="see-line" x1="1389" y1="95"   x2="73"   y2="1207" stroke="rgba(255,255,255,0.6)" strokeWidth="12" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.6s' }} />
                   <line className="see-line" x1="1432" y1="1033" x2="82"   y2="2236" stroke="rgba(255,255,255,0.6)" strokeWidth="12" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.8s' }} />
 
-                  {/* ყველა წერტილი იდენტური ზომის და სტილისაა */}
                   <circle className="see-node" cx="1389" cy="95"   r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0s',   transformOrigin: '1389px 95px' }} />
                   <circle className="see-node" cx="1357" cy="482"  r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.2s', transformOrigin: '1357px 482px' }} />
                   <circle className="see-node" cx="123"  cy="726"  r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.4s', transformOrigin: '123px 726px' }} />
                   
-                  {/* ყოფილი დიდი წერტილი ახლა სტანდარტულია */}
                   <circle className="see-node" cx="73"   cy="1207" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.5s', transformOrigin: '73px 1207px' }} />
 
                   <circle className="see-node" cx="1432" cy="1033" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.6s', transformOrigin: '1432px 1033px' }} />
