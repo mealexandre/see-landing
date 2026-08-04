@@ -133,7 +133,7 @@ export default function Hero() {
           z-index: 1;
           max-width: 800px;
           margin: 0 auto;
-          margin-top: -12vh; /* მობილურზე ოდნავ მეტად იწევა ზემოთ */
+          margin-top: -12vh;
         }
 
         .see-connect-box {
@@ -166,6 +166,31 @@ export default function Hero() {
         .svg-wrapper {
           margin-bottom: 1.25rem;
         }
+
+        .logo-frame {
+          position: relative;
+          width: 108px;
+          aspect-ratio: 1508 / 2328;
+        }
+
+        .logo-frame img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          position: relative;
+          z-index: 1;
+          -webkit-user-drag: none;
+          filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.4));
+        }
+
+        .logo-frame svg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+        }
         
         .text-wrapper {
           text-align: center;
@@ -177,7 +202,7 @@ export default function Hero() {
 
         @media (min-width: 768px) {
           .content-wrapper {
-            margin-top: -8vh; /* დესკტოპზე ვინარჩუნებთ ძველ იდეალურ პოზიციას */
+            margin-top: -8vh;
           }
           .box-inner {
             flex-direction: row;
@@ -186,6 +211,9 @@ export default function Hero() {
           .svg-wrapper {
             margin-bottom: 0;
             margin-right: 1.5rem;
+          }
+          .logo-frame {
+            width: 128px;
           }
           .text-wrapper {
             text-align: left;
@@ -202,23 +230,18 @@ export default function Hero() {
         }
 
         @keyframes seeLineDraw {
-          0%   { stroke-dashoffset: 150; opacity: 0; }
+          0%   { stroke-dashoffset: 3200; opacity: 0; }
           10%  { opacity: 1; }
           22%  { stroke-dashoffset: 0; opacity: 1; }
           78%  { stroke-dashoffset: 0; opacity: 1; }
           92%  { opacity: 0; }
-          100% { stroke-dashoffset: 150; opacity: 0; }
+          100% { stroke-dashoffset: 3200; opacity: 0; }
         }
 
         @keyframes seeNodePulse {
-          0%, 15%  { opacity: 0.25; transform: scale(0.85); }
-          25%, 75% { opacity: 1; transform: scale(1); }
-          90%, 100%{ opacity: 0.25; transform: scale(0.85); }
-        }
-        
-        @keyframes seeCenterBreathe {
-          0%, 100% { transform: scale(1); }
-          50%      { transform: scale(1.12); }
+          0%, 15%  { opacity: 0.7; transform: scale(0.95); }
+          25%, 75% { opacity: 1; transform: scale(1.05); }
+          90%, 100%{ opacity: 0.7; transform: scale(0.95); }
         }
 
         .see-connect-box:hover .see-line {
@@ -230,11 +253,10 @@ export default function Hero() {
           animation-play-state: paused;
           opacity: 1 !important;
           transform: scale(1) !important;
-          fill: #47bdb2 !important;
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .see-line, .see-node, .see-center-node, .see-glow {
+          .see-line, .see-node, .see-glow {
             animation: none !important;
             opacity: 1 !important;
             stroke-dashoffset: 0 !important;
@@ -254,8 +276,8 @@ export default function Hero() {
             marginBottom: '1rem',
           }}
         >
-          Find your space.<br />
-          Find your people.
+          Find Your Space<br />
+          Find Your People
         </h1>
 
         <p
@@ -291,41 +313,39 @@ export default function Hero() {
 
           <div className="box-inner">
             <div className="svg-wrapper">
-              <svg
-                width="260"
-                height="160"
-                viewBox="0 0 260 160"
-                style={{ position: 'relative', zIndex: 1, display: 'block' }}
-              >
-                <line className="see-line" x1="80" y1="100" x2="20" y2="30" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0s' }} />
-                <line className="see-line" x1="80" y1="100" x2="120" y2="20" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.2s' }} />
-                <line className="see-line" x1="80" y1="100" x2="150" y2="90" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.35s' }} />
-                <line className="see-line" x1="80" y1="100" x2="35" y2="140" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.6s' }} />
-                <line className="see-line" x1="80" y1="100" x2="10" y2="85" stroke="#47bdb2" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.8s' }} />
+              <div className="logo-frame">
+                <img src="/see-logo.png" alt="SEE logo" />
 
-                <line className="see-line" x1="20" y1="30" x2="120" y2="20" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.2s' }} />
-                <line className="see-line" x1="20" y1="30" x2="10" y2="85" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.4s' }} />
-                <line className="see-line" x1="35" y1="140" x2="10" y2="85" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.6s' }} />
-                
-                <line className="see-line" x1="120" y1="20" x2="150" y2="90" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.8s' }} />
-                <line className="see-line" x1="150" y1="90" x2="230" y2="40" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.0s' }} />
-                <line className="see-line" x1="150" y1="90" x2="245" y2="95" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.2s' }} />
-                <line className="see-line" x1="150" y1="90" x2="195" y2="145" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.4s' }} />
-                <line className="see-line" x1="230" y1="40" x2="245" y2="95" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.6s' }} />
-                <line className="see-line" x1="245" y1="95" x2="195" y2="145" stroke="rgba(71,189,178,0.4)" strokeWidth="1" strokeLinecap="round" strokeDasharray="150" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '2.8s' }} />
+                <svg viewBox="0 0 1508 2328" xmlns="http://www.w3.org/2000/svg">
+                  {/* მთავარი ხაზები გასწორდა თეთრ ფერზე */}
+                  <line className="see-line" x1="1389" y1="95"   x2="1357" y2="482"  stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0s' }} />
+                  <line className="see-line" x1="1357" y1="482"  x2="73"   y2="1207" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.2s' }} />
+                  <line className="see-line" x1="73"   y1="1207" x2="123"  y2="726"  stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.4s' }} />
+                  <line className="see-line" x1="123"  y1="726"  x2="1389" y2="95"   stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.6s' }} />
 
-                <circle className="see-node" cx="20" cy="30" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0s', transformOrigin: '20px 30px' }} />
-                <circle className="see-node" cx="120" cy="20" r="5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.2s', transformOrigin: '120px 20px' }} />
-                <circle className="see-node" cx="230" cy="40" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.4s', transformOrigin: '230px 40px' }} />
-                <circle className="see-node" cx="245" cy="95" r="5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.6s', transformOrigin: '245px 95px' }} />
-                <circle className="see-node" cx="195" cy="145" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.8s', transformOrigin: '195px 145px' }} />
-                <circle className="see-node" cx="35" cy="140" r="5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '1.0s', transformOrigin: '35px 140px' }} />
-                <circle className="see-node" cx="10" cy="85" r="4.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '1.2s', transformOrigin: '10px 85px' }} />
-                <circle className="see-node" cx="150" cy="90" r="5.5" fill="#e2e8f0" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.35s', transformOrigin: '150px 90px' }} />
+                  <line className="see-line" x1="1432" y1="1033" x2="1382" y2="1570" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '0.8s' }} />
+                  <line className="see-line" x1="1382" y1="1570" x2="82"   y2="2236" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.0s' }} />
+                  <line className="see-line" x1="82"   y1="2236" x2="263"  y2="1311" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.2s' }} />
+                  <line className="see-line" x1="263"  y1="1311" x2="1432" y2="1033" stroke="#ffffff" strokeWidth="16" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.4s' }} />
 
-                <circle cx="80" cy="100" r="9" fill="rgba(71,189,178,0.2)" />
-                <circle className="see-center-node" cx="80" cy="100" r="6" fill="#47bdb2" style={{ animation: 'seeCenterBreathe 2.5s ease-in-out infinite', transformOrigin: '80px 100px' }} />
-              </svg>
+                  {/* შიდა ხაზებიც ოდნავ გამჭვირვალე თეთრით */}
+                  <line className="see-line" x1="1389" y1="95"   x2="73"   y2="1207" stroke="rgba(255,255,255,0.6)" strokeWidth="12" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.6s' }} />
+                  <line className="see-line" x1="1432" y1="1033" x2="82"   y2="2236" stroke="rgba(255,255,255,0.6)" strokeWidth="12" strokeLinecap="round" strokeDasharray="3200" style={{ animation: 'seeLineDraw 6s ease-in-out infinite', animationDelay: '1.8s' }} />
+
+                  {/* ყველა წერტილი იდენტური ზომის და სტილისაა */}
+                  <circle className="see-node" cx="1389" cy="95"   r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0s',   transformOrigin: '1389px 95px' }} />
+                  <circle className="see-node" cx="1357" cy="482"  r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.2s', transformOrigin: '1357px 482px' }} />
+                  <circle className="see-node" cx="123"  cy="726"  r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.4s', transformOrigin: '123px 726px' }} />
+                  
+                  {/* ყოფილი დიდი წერტილი ახლა სტანდარტულია */}
+                  <circle className="see-node" cx="73"   cy="1207" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.5s', transformOrigin: '73px 1207px' }} />
+
+                  <circle className="see-node" cx="1432" cy="1033" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.6s', transformOrigin: '1432px 1033px' }} />
+                  <circle className="see-node" cx="1382" cy="1570" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '0.8s', transformOrigin: '1382px 1570px' }} />
+                  <circle className="see-node" cx="82"   cy="2236" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '1.0s', transformOrigin: '82px 2236px' }} />
+                  <circle className="see-node" cx="263"  cy="1311" r="50" fill="#ffffff" stroke="#47bdb2" strokeWidth="18" style={{ animation: 'seeNodePulse 6s ease-in-out infinite', animationDelay: '1.2s', transformOrigin: '263px 1311px' }} />
+                </svg>
+              </div>
             </div>
 
             <div className="text-wrapper" style={{ position: 'relative', zIndex: 1, fontSize: 'clamp(1.1rem, 2vw, 1.3rem)', fontWeight: 600, letterSpacing: '-0.01em', lineHeight: 1.3 }}>
